@@ -21,7 +21,7 @@ public class ConexaoMySQL {
 			try {
 				conn = DriverManager.getConnection(URL, USER, PASSWORD);
 				if (conn != null) {
-					System.out.println("Connected to Database...");
+				//	System.out.println("Connected to Database...");
 					
 				}
 				return conn;

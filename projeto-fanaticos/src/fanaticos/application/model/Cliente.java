@@ -62,8 +62,12 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return "Cliente [customer_id=" + customer_id + ", name=" + name + ", last_name=" + last_name + ", phone_number="
-				+ phone_number + ", is_whatsapp=" + is_whatsapp + "]";
+		return "customer_id=" + customer_id +
+				"\nname=" + name + 
+				"\nlast_name=" + last_name + 
+				"\nphone_number="
+				+ phone_number +
+				"\nis_whatsapp=" + is_whatsapp;
 	}
 	
 	
