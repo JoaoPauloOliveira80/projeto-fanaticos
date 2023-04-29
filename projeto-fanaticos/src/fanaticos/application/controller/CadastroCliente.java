@@ -56,11 +56,6 @@ public class CadastroCliente {
 
 				listaCliente.add(cli);
 			}
-			
-			for(Cliente c : listaCliente) {
-				System.out.println(c);
-				System.out.println();
-			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,5 +81,78 @@ public class CadastroCliente {
 		}
 		return listaCliente;
 
+	}
+
+	public static void update(Cliente cli) throws SQLException {
+		String sql = "update customers set name= ?, last_name= ?, phone_number= ?, is_whatsapp= ? where  customer_id = ?";
+
+		Connection conn = null;
+		PreparedStatement pstm = null;
+
+		try {
+			// cria conexao com banco
+			conn = ConexaoMySQL.conectar();
+
+			// cria classe para execuça
+			pstm = conn.prepareStatement(sql);
+
+			// adicionar valores pra atualizar
+			pstm.setString(1, cli.getName());
+			pstm.setString(2, cli.getLast_name());
+			pstm.setString(3, cli.getPhone_number());
+			pstm.setBoolean(4, cli.isIs_whatsapp());
+			pstm.setInt(5, cli.getCustomer_id());
+
+			pstm.execute();
+
+			System.out.println("Cliente atualizado com sucesso");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if (pstm != null) {
+					pstm.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+
+	}
+
+	public static void deleteById(int id) {
+		String sql = "DELETE FROM customers WHERE customer_id = ?";
+		Connection conn = null;
+		PreparedStatement pstm = null;
+
+		try {
+			conn = ConexaoMySQL.conectar();
+
+			pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, id);
+			pstm.execute();
+			
+			System.out.println("Deletado com sucesso...");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if (pstm != null) {
+					pstm.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 	}
 }
